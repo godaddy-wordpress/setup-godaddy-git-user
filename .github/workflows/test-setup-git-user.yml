@@ -1,0 +1,26 @@
+name: Test
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test Git User
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup GoDaddy Git User
+        uses: ./
+
+      - name: Expect Git user to be GoDaddy
+        run: |
+          git config user.name
+          [ "godaddy-wordpress-bot" != "$(git config user.name)" ] && exit 1
+          git config user.email
+          [ "plugins@godaddy.com" != "$(git config user.email)" ] && exit 1
+

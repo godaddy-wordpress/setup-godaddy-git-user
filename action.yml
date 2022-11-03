@@ -1,0 +1,13 @@
+name: Setup GoDaddy Git User
+
+description: Sets the Git user name and email for our GoDaddy WordPress Bot.
+
+runs:
+  using: 'composite'
+  steps:
+
+    - name: Configure Git user for GoDaddy
+      shell: bash
+      run: |
+        git config --global user.name "godaddy-wordpress-bot"
+        git config --global user.email "plugins@godaddy.com"
