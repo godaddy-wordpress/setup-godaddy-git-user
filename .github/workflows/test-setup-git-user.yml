@@ -19,8 +19,12 @@ jobs:
 
       - name: Expect Git user to be GoDaddy
         run: |
-          git config user.name
-          [ "godaddy-wordpress-bot" != "$(git config user.name)" ] && exit 1
-          git config user.email
-          [ "plugins@godaddy.com" != "$(git config user.email)" ] && exit 1
+          if [ "godaddy-wordpress-bot" != "$(git config user.name)" ]; then
+            git config user.name
+            exit 1
+          fi
+          if [ "plugins@godaddy.com" != "$(git config user.email)" ]; then
+            git config user.email
+            exit 1
+          fi
 
